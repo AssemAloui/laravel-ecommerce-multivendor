@@ -10,8 +10,7 @@
 @endif
 
 <div class="form-group">
-    <label for="name">Category Name</label>
-    <x-form.input name="name" :value="$category->name" />
+    <x-form.input label="Category Name" name="name" :value="$category->name" />
 </div>
 <div class="form-group">
     <label for="">Category Parent</label>
@@ -25,11 +24,11 @@
 </div>
 <div class="form-group">
     <label for="description">Category Description</label>
-    <textarea name="description" id="description" class="form-control">{{ old('description', $category->description) }}</textarea>
+    <x-form.textarea name="description" :value="$category->description" />
 </div>
 <div class="form-group">
-    <label for="image">Image</label>
-    <input type="file" name="image" id="image" class="form-control" accept="image/*">
+    <x-form.label for="image">Image</x-form.label>
+    <x-form.input type="file" name="image" id="image"  accept="image/*"/>
     @if ($category->image)
         <img src="{{ asset('storage/' . $category->image) }}" alt="" height="50">
     @endif
@@ -37,21 +36,8 @@
 <div class="form-group">
     <label for="">Status</label>
     <div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="status" value="active"
-                @checked(old('status', $category->status) == 'active')>
-            <label class="form-check-label">
-                active
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="status" value="archived"
-                @checked(old('status', $category->status) == 'archived')>
-            <label class="form-check-label">
-                archived
-            </label>
-        </div>
-
+        <x-form.radio name="status" :options="['active' => 'Active', 'archived' => 'Archived']" :checked="$category->status" />
+        
     </div>
 </div>
 <div class="form-group">

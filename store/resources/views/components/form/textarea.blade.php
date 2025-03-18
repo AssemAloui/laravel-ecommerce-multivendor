@@ -1,6 +1,5 @@
 @props(['name',
      'value' => '', 
-    'type' => 'text',
     'label' => false,])
 
 
@@ -8,11 +7,11 @@
 <label for="">{{ $label }}</label>
 @endif
 
-<input 
-    type="{{ $type }}" 
+<textarea
     name="{{ $name }}" 
-    value="{{ old($name, $value) }}"
-    {{ $attributes->class(['form-control', 'is-invalid' => $errors->has($name)]) }}/>
+    {{ $attributes->class(['form-control', 'is-invalid' => $errors->has($name)]) }}>
+    {{ old($name, $value) }}
+</textarea>
     @error($name)
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
