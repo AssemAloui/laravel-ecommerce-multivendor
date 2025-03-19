@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
@@ -12,6 +13,35 @@ class Category extends Model
     protected $fillable = [
         "name", "parent_id", "description","image","status","slug"
         ];
+    
+    public function scopeActive(Builder $builder) 
+    {
+        return $builder->where("status", "=", "active");
+    }
+        
+    public function scopeStatus(Builder $builder,$status) 
+    {
+        return $builder->where("status", '=', $status);
+    }
+
+    public function scopeFilter(Builder $builder,$filter)
+    {
+
+        $builder->when($filter['name'] ?? false, function ($builder,$value) {
+            $builder->where(
+                "name",
+                "like",
+                "%{$value}%");
+        });
+
+        $builder->when($filter['status'] ?? false, function ($builder,$value) {
+            $builder->where(
+                "status",
+                "=",
+                $value);
+        });
+        
+    }
 
     public static function rules($id = 0) 
     {
