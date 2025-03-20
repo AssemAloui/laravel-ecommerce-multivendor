@@ -11,5 +11,14 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Route::get('/categories/{category}', [CategoriesController::class, 'show'])->name('categories.show')
+    //         ->where('category', '\d+');
+
+    Route::get('/categories/trash', [CategoriesController::class, 'trash'])->name('categories.trash');
+
+    Route::put('/categories/{category}/restore', [CategoriesController::class, 'restore'])->name('categories.restore');
+
+    Route::delete('/categories/{category}/delete', [CategoriesController::class, 'forceDelete'])->name('categories.force-delete');
+
     Route::resource('/categories', CategoriesController::class);
 });
