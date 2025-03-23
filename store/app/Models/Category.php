@@ -20,9 +20,9 @@ class Category extends Model
         "slug"
     ];
 
-    public function producs()
+    public function products()
     {
-        return $this->hasMany(Category::class, 'category_id', 'id');
+        return $this->hasMany(Product::class, 'category_id', 'id');
     }
 
     public function parent()

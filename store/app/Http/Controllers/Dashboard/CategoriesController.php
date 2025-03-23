@@ -23,11 +23,16 @@ class CategoriesController extends Controller
 
 
         $categories = Category::with('parent')
-        // leftJoin("categories as parents","parents.id","=","categories.parent_id")
-        //     ->select([
-        //         'categories.*',
-        //         'parents.name as parent_name',
-        //     ])
+            // leftJoin("categories as parents","parents.id","=","categories.parent_id")
+            //     ->select([
+            //         'categories.*',
+            //         'parents.name as parent_name',
+            //     ])
+            ->withcount([
+                'products as products_number' => function ($query) {
+                    $query->where('status', '=', 'active');
+                }
+            ])
             ->filter($request->query())
             ->orderBy("categories.name")
             ->paginate();
@@ -74,9 +79,12 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view(
+            "dashboard.categories.show",
+            ["category" => $category]
+        );
     }
 
     /**
@@ -172,7 +180,7 @@ class CategoriesController extends Controller
     public function restore(Request $request, $id)
     {
         $category = Category::onlyTrashed()->findOrFail($id);
-        
+
         $category->restore();
         return redirect()->route("dashboard.categories.trash")->with("success", "Category restored!");
     }
@@ -180,7 +188,7 @@ class CategoriesController extends Controller
     public function forceDelete(Request $request, $id)
     {
         $category = Category::onlyTrashed()->findOrFail($id);
-        
+
         $category->forceDelete();
 
         if ($category->image) {
@@ -190,4 +198,3 @@ class CategoriesController extends Controller
         return redirect()->route("dashboard.categories.trash")->with("success", "Category deleted forever!");
     }
 }
-

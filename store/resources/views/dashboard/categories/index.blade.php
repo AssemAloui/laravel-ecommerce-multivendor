@@ -35,6 +35,7 @@
                 <th>Name</th>
                 <th>Status</th>
                 <th>Parent</th>
+                <th>Products #</th>
                 <th>Created at</th>
                 <th></th>
             </tr>
@@ -44,9 +45,10 @@
             <tr>
                 <td><img src="{{ asset('storage/' . $category->image) }}" alt="" height="50"></td>
                 <td>{{ $category->id }}</td>
-                <td>{{ $category->name }}</td>
+                <td><a href="{{ route('dashboard.categories.show',$category->id) }}">{{ $category->name }}</a></td>
                 <td>{{ $category->status }}</td>
                 <td>{{ $category->parent->name }}</td>
+                <td>{{ $category->products_number }}</td>
                 <td>{{ $category->created_at }}</td>
                 <td>
                     <a href="{{ route('dashboard.categories.edit',$category->id) }}" class="btn btn-sm btn-outline-success">Edit</a>
