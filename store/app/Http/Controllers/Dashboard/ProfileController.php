@@ -31,7 +31,6 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
-
         // $user->profile()->fill($request->all())->save();
         $profile = $user->profile;
         $profile->fill($request->all()); 
