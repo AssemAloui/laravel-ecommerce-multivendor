@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Intl\Countries;
@@ -31,6 +32,7 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+        
         // $user->profile()->fill($request->all())->save();
         $profile = $user->profile;
         $profile->fill($request->all()); 
