@@ -50,4 +50,9 @@ class Product extends Model
             'id' // PK related model
         );
     }
+
+    public function scopeActive(Builder $builder)
+    {
+        return $builder->where('status', '=', 'active');    
+    }
 }
