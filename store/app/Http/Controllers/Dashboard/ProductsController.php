@@ -83,7 +83,7 @@ class ProductsController extends Controller
 
         $tags = explode(",", $request->post("tags"));
         $tag_ids = [];
-
+        
         foreach ($tags as $t_name) {
             $slug = Str::slug($t_name);
 
