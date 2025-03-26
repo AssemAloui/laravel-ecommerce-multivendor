@@ -70,7 +70,7 @@ return [
     */
 
     'timezone' => 'UTC',
-
+    'currency' => 'USD',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -210,6 +210,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Currency' => App\Helpers\Currency::class,
     ])->toArray(),
 
 ];

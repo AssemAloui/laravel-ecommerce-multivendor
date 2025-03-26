@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -54,5 +55,29 @@ class Product extends Model
     public function scopeActive(Builder $builder)
     {
         return $builder->where('status', '=', 'active');    
+    }
+
+    //accessor
+    public function getImageUrlAttribute() 
+    {
+
+        return 'https://motobros.com/wp-content/uploads/2024/09/no-image.jpeg';
+        // if(!$this->image) {
+        //     return 'https://motobros.com/wp-content/uploads/2024/09/no-image.jpeg';
+        // }
+        // if(Str::startsWith($this->image,['http://', 'https://'])) {
+        //     return $this->image;
+            
+        // }
+        // return asset('storage/' . $this->image);
+    }
+
+    public function getSalePercentAttribute()
+    {
+        if(!$this->compare_price) {
+            return 0;
+        }
+        return round((100 * $this->price / $this->compare_price) -100,1);
+        
     }
 }
