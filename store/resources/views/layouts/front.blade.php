@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/tiny-slider.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/glightbox.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
+    <style>
+        .container {
+            display: block !important;
+        }
+    </style>
     @stack('styles')
 </head>
 

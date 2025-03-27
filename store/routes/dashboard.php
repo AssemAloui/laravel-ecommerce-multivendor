@@ -7,7 +7,7 @@ use App\Http\Controllers\Dashboard\ProductsController;
 use App\Http\Controllers\Dashboard\ProfileController;
 
 Route::group([
-    'middleware' => ['auth'],
+    'middleware' => ['auth', 'auth.type:super-admin,admin'],
     'as' => 'dashboard.',
     'prefix' => 'dashboard',
 ], function () {
