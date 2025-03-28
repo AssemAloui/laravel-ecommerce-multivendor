@@ -22,7 +22,8 @@ class UpdateUserLastActiveAt
             $user->forceFill([
                 "last_active_at"=> Carbon::now(),
                 ])->save(); 
+        }
         return $next($request);
-    }
+
 }
 }

@@ -17,8 +17,10 @@ class CartController extends Controller
     public function index(CartRepository $cart)
     {
         $items = $cart->get();
+        $total = $cart->total();
         return view("front.cart", [
             "cart" => $items,
+            "total" => $total,
         ]);
     }
 

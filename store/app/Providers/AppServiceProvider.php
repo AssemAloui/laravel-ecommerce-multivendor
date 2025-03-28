@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
+use App\Observers\CartObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrapFour();
+        Cart::observe(CartObserver::class);
     }
 }

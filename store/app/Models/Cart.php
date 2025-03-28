@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Observers\CartObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Cart extends Model
 {
@@ -23,16 +22,17 @@ class Cart extends Model
 
     protected static function boot()
     {
+        parent::boot();
         static::observe(CartObserver::class);
         // static::creating(function (Cart $cart) {
-        //     $cart->id = Str::uuid();
+        //     $cart->id = (string) \Illuminate\Support\Str::uuid();
         // });
     }
 
     public function user()
     {
         return $this->belongsTo(User::class)->withDefault([
-            'name'=> 'Anonymous',
+            'name' => 'Anonymous',
         ]);
     }
     public function product()

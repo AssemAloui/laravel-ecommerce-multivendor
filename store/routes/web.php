@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\HomeController;
@@ -37,6 +38,7 @@ Route::get('/products', [ProductsController::class,'index'])->name('products.ind
 
 Route::get('/products/{product:slug}', [ProductsController::class,'show'])->name('products.show');
 
+Route::resource('cart', CartController::class);
 
 
 require __DIR__.'/auth.php';
