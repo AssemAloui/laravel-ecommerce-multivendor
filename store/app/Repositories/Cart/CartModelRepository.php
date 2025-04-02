@@ -40,6 +40,7 @@ class CartModelRepository implements CartRepository
                 'quantity' => $quantity
             ]);
             $this->get()->push($cart);
+            return $cart;
         }
 
         $item->increment('quantity', $quantity);
@@ -54,14 +55,14 @@ class CartModelRepository implements CartRepository
             ]);
     }
 
-    public function delete(Product $product)
+    public function delete($id)
     {
-        Cart::query()->delete();
+        Cart::where('id', '=', $id)->delete();
     }
 
     public function empty()
     {
-        Cart::where('cookie_id', '=', $this->getCookieId())->delete();
+        Cart::query()->delete();
     }
 
     public function total(): float
